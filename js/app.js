@@ -1078,9 +1078,11 @@
           </div>
         </div>
 
-        <div class="map-placeholder">
-          ${icons.mapPin}
-          <span>ПроСкважинуНасосы — г. Пермь, Пермский край</span>
+        <div class="map-section">
+          <h2 class="map-section__title">Как нас найти</h2>
+          <div class="map-container">
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c&source=constructor&ll=56.248383%2C58.010374&z=12&pt=56.248383%2C58.010374%2Cpm2rdm" width="100%" height="420" frameborder="0" allowfullscreen="true" style="display:block;border-radius:12px;"></iframe>
+          </div>
         </div>
       </div>
     `);
