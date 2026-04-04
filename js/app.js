@@ -1034,7 +1034,7 @@
           <div class="contact-card">
             <div class="contact-card__icon">${icons.mapPin}</div>
             <div class="contact-card__label">Адрес</div>
-            <div class="contact-card__value">г. Пермь, Пермский край</div>
+            <div class="contact-card__value">г. Пермь, ул. Челюскинцев, д. 23, офис 8</div>
           </div>
         </div>
 
@@ -1099,11 +1099,11 @@
         // Clear previous map if exists
         container.innerHTML = '';
         var map = new ymaps.Map(container, {
-          center: [58.010374, 56.248383],
+          center: [57.986159, 56.231321],
           zoom: 12,
           controls: ['zoomControl', 'fullscreenControl', 'geolocationControl']
         });
-        var placemark = new ymaps.Placemark([58.010374, 56.248383], {
+        var placemark = new ymaps.Placemark([57.986159, 56.231321], {
           balloonContentHeader: '\u041f\u0440\u043e\u0421\u043a\u0432\u0430\u0436\u0438\u043d\u0443\u041d\u0430\u0441\u043e\u0441\u044b',
           balloonContentBody: '\u0433. \u041f\u0435\u0440\u043c\u044c, \u041f\u0435\u0440\u043c\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439<br>+7 (995) 278-25-62',
           hintContent: '\u041f\u0440\u043e\u0421\u043a\u0432\u0430\u0436\u0438\u043d\u0443\u041d\u0430\u0441\u043e\u0441\u044b'
