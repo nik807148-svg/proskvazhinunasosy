@@ -1080,12 +1080,57 @@
 
         <div class="map-section">
           <h2 class="map-section__title">Как нас найти</h2>
-          <div class="map-container">
-            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c&source=constructor&ll=56.248383%2C58.010374&z=12&pt=56.248383%2C58.010374%2Cpm2rdm" width="100%" height="420" frameborder="0" allowfullscreen="true" style="display:block;border-radius:12px;"></iframe>
-          </div>
+          <div class="map-container" id="yandexMapContainer" style="height:420px;"></div>
         </div>
       </div>
     `);
+
+    // Init Yandex Map after render
+    initYandexMap();
+  }
+
+  function initYandexMap() {
+    var container = document.getElementById('yandexMapContainer');
+    if (!container) return;
+
+    function createMap() {
+      if (typeof ymaps === 'undefined') return;
+      ymaps.ready(function() {
+        // Clear previous map if exists
+        container.innerHTML = '';
+        var map = new ymaps.Map(container, {
+          center: [58.010374, 56.248383],
+          zoom: 12,
+          controls: ['zoomControl', 'fullscreenControl', 'geolocationControl']
+        });
+        var placemark = new ymaps.Placemark([58.010374, 56.248383], {
+          balloonContentHeader: '\u041f\u0440\u043e\u0421\u043a\u0432\u0430\u0436\u0438\u043d\u0443\u041d\u0430\u0441\u043e\u0441\u044b',
+          balloonContentBody: '\u0433. \u041f\u0435\u0440\u043c\u044c, \u041f\u0435\u0440\u043c\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439<br>+7 (995) 278-25-62',
+          hintContent: '\u041f\u0440\u043e\u0421\u043a\u0432\u0430\u0436\u0438\u043d\u0443\u041d\u0430\u0441\u043e\u0441\u044b'
+        }, {
+          preset: 'islands#blueWaterIcon'
+        });
+        map.geoObjects.add(placemark);
+      });
+    }
+
+    if (typeof ymaps !== 'undefined') {
+      createMap();
+    } else if (!document.getElementById('ya-map-api')) {
+      var s = document.createElement('script');
+      s.id = 'ya-map-api';
+      s.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU';
+      s.onload = createMap;
+      document.head.appendChild(s);
+    } else {
+      // Script loading, wait
+      var check = setInterval(function() {
+        if (typeof ymaps !== 'undefined') {
+          clearInterval(check);
+          createMap();
+        }
+      }, 200);
+    }
   }
 
   // ── ROUTER ──
