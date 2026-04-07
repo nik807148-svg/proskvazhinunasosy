@@ -2090,15 +2090,15 @@ a.footer__contact:hover {
 @media (max-width: 768px) {
   :root {
     --header-h: 60px;
-    --top-bar-h: 36px;
-    --total-header-h: 96px;
+    --top-bar-h: 44px;
+    --total-header-h: 104px;
   }
 
-  .top-bar__left { gap: 12px; }
-  .top-bar__hours { display: none; }
+  .top-bar__left { display: none; }
   .top-bar__social { display: none; }
-  .top-bar__cta-btn { display: none; }
   .top-bar__phone svg { display: none; }
+  .top-bar__right { width: 100%; justify-content: space-between; }
+  .top-bar__cta-btn { display: inline-flex; align-items: center; font-size: 0.78rem; padding: 6px 14px; }
   .top-bar { font-size: 0.72rem; }
 
   .nav { display: none; }
