@@ -196,6 +196,27 @@
   </div>
 
   <script>
+    // Отправка уведомлений о заявке
+    async function sendOrderNotification(name, phone, comment) {
+      var text = '\uD83D\uDD14 Новая заявка — ПроСкважинуНасосы\n\n\uD83D\uDC64 Имя: ' + name + '\n\uD83D\uDCDE Телефон: ' + phone + '\n\uD83D\uDCAC Комментарий: ' + (comment || 'не указан');
+      // Telegram
+      try {
+        fetch('https://api.telegram.org/bot8717741854:AAEgVyaw0Uv7gkNWXQWQyjPhmiFM-OgVxsw/sendMessage', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({chat_id: '7692089613', text: text})
+        });
+      } catch(e) {}
+      // Email via FormSubmit
+      try {
+        fetch('https://formsubmit.co/ajax/Petrokom-pm@mail.ru', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+          body: JSON.stringify({name: name, phone: phone, comment: comment || '', _subject: 'Новая заявка — ПроСкважинуНасосы', _captcha: 'false'})
+        });
+      } catch(e) {}
+    }
+
     function openOrderModal(e) {
       if (e) e.preventDefault();
       var m = document.getElementById('orderModal');
@@ -210,8 +231,10 @@
     function submitOrderModal() {
       var name = document.getElementById('modalName').value.trim();
       var phone = document.getElementById('modalPhone').value.trim();
+      var comment = document.getElementById('modalComment').value.trim();
       if (!name) { alert('Введите имя'); return; }
       if (!phone) { alert('Введите номер телефона'); return; }
+      sendOrderNotification(name, phone, comment);
       document.getElementById('modalFormBody').innerHTML = '<div style="text-align:center;padding:30px 0;">' +
         '<div style="font-size:3rem;margin-bottom:12px;">✅</div>' +
         '<h3 style="margin:0 0 8px;color:#0077B6;">Заявка принята!</h3>' +

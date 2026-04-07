@@ -905,10 +905,16 @@
       submitBtn.addEventListener('click', () => {
         const name = $('#orderName').value.trim();
         const phone = $('#orderPhone').value.trim();
+        const address = ($('#orderAddress') && $('#orderAddress').value.trim()) || '';
+        const comment = ($('#orderComment') && $('#orderComment').value.trim()) || '';
         if (!name || !phone) {
           showToast('Заполните обязательные поля: Имя и Телефон');
           return;
         }
+        // Уведомления в Telegram + Email
+        const cartList = cart.map(i => i.name + ' ×' + i.qty).join(', ');
+        const fullComment = [address ? 'Адрес: ' + address : '', comment ? 'Комментарий: ' + comment : '', 'Товары: ' + cartList].filter(Boolean).join(' | ');
+        if (typeof sendOrderNotification === 'function') sendOrderNotification(name, phone, fullComment);
         cart = [];
         updateCartBadge();
         const summary = $('#cartSummary');
