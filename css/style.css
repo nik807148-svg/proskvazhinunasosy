@@ -451,6 +451,24 @@ ul, ol { list-style: none; }
   color: var(--text-muted);
 }
 
+.mobile-nav__cta {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  padding: 14px 16px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius);
+  transition: background var(--transition);
+}
+
+.mobile-nav__cta:hover {
+  background: var(--primary-dark);
+  color: #fff;
+}
+
 .mobile-nav__search {
   margin-top: 16px;
 }
